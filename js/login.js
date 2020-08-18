@@ -1,4 +1,4 @@
-//Funciones de animacion
+//Funciones de animacion del login y sus label
 $(window, document, undefined).ready(function() {
 
     $('input').blur(function() {
@@ -40,7 +40,18 @@ $(window, document, undefined).ready(function() {
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e) {
+    document.getElementById("button").addEventListener("click", function(e) {
 
+        let email = document.getElementById('email');
+        let pass = document.getElementById('pass');
+
+        if (email.value.length != 0 && pass.value.length != 0) {
+            return location.href = "index.html";
+        } else {
+            let error = document.getElementById("error");
+            error.textContent = "Usuario o contraseña incorrecta";
+        }
+    })
 
 
 

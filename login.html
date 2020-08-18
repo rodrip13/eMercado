@@ -18,7 +18,7 @@
 </head>
 
 <body class="text-center">
-    <div class="container p-5">
+    <div class="container">
         <!--     <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
                     <h4 class="alert-heading">¡A trabajar! :)</h4>
                     <p>Esta sección corresponde a: Entrega 1 (Fecha de entrega: 16/08/2020) -> Punto 3 y 4.</p>
@@ -26,22 +26,26 @@
                     <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
                     </div> -->
 
-        <hgroup>
-            <h1>E-Mercado</h1>
-        </hgroup>
-        <form>
-            <div class="group">
-                <input type="email"><span class="highlight"></span><span class="bar"></span>
-                <label>Email</label>
-            </div>
-            <div class="group">
-                <input type="password"><span class="highlight"></span><span class="bar"></span>
-                <label>Contraseña</label>
-            </div>
-            <button type="button" class="button buttonBlue">Ingresar
+        <div class="logo">
+            <img src="/img/login.png" alt="">
+        </div>
+        <div class="form">
+            <form>
+                <div class="group">
+
+                    <input type="email" id="email"><span class="highlight"></span><span class="bar"></span>
+                    <label>Email</label>
+                </div>
+                <div class="group">
+                    <input type="password" id="pass"><span class="highlight"></span><span class="bar"></span>
+                    <label>Contraseña</label>
+                    <p id="error"></p>
+                </div>
+                <button type="button" class="button buttonBlue" id="button">Ingresar
               <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
             </button>
-        </form>
+            </form>
+        </div>
     </div>
 
     <script src="js/init.js"></script>

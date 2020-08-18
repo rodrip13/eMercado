@@ -2,10 +2,31 @@
     box-sizing: border-box;
 }
 
+#error {
+    color: red;
+}
+
+
+/* .container {
+    padding: 5px;
+    background-image: radial-gradient(white 25%, transparent 70%)
+} */
+
+img {
+    width: 380px;
+    border: 1px solid #ebebeb;
+    margin: 1em auto;
+    box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
+}
+
 body {
     font-family: Helvetica;
-    background: #eee;
-    -webkit-font-smoothing: antialiased;
+    background: hsla(0, 0%, 99%, 1);
+    background: linear-gradient(45deg, hsla(0, 0%, 99%, 0.5) 0%, hsla(334, 77%, 47%, 1) 100%, hsla(319, 72%, 75%, 1) 100%);
+    background: -moz-linear-gradient(45deg, hsla(0, 0%, 99%, 0.5) 0%, hsla(334, 77%, 47%, 1) 100%, hsla(319, 72%, 75%, 1) 100%);
+    background: -webkit-linear-gradient(45deg, hsla(0, 0%, 99%, 0.5) 0%, hsla(334, 77%, 47%, 1) 100%, hsla(319, 72%, 75%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#FCFCFC", endColorstr="#D61C6C", GradientType=1);
+    background-attachment: fixed;
 }
 
 hgroup {
@@ -13,18 +34,9 @@ hgroup {
     margin-top: 4em;
 }
 
-h1,
-h3 {
-    font-weight: 300;
-}
-
-h1 {
-    color: #636363;
-}
-
 form {
     width: 380px;
-    margin: 4em auto;
+    margin: 2em auto;
     padding: 3em 2em 2em 2em;
     background: #fafafa;
     border: 1px solid #ebebeb;
@@ -75,8 +87,8 @@ input.used~label {
     top: -20px;
     transform: scale(.75);
     left: -2px;
-    /* font-size: 14px; */
-    color: #4a89dc;
+    /*     font-size: 14px; */
+    color: black;
 }
 
 
@@ -95,7 +107,7 @@ input.used~label {
     width: 0;
     bottom: 1px;
     position: absolute;
-    background: #4a89dc;
+    background: black;
     transition: all 0.2s ease;
 }
 
@@ -140,7 +152,7 @@ input:focus~.highlight {
 
 @keyframes inputHighlighter {
     from {
-        background: #4a89dc;
+        background: #d61c6c;
     }
     to {
         width: 0;
@@ -166,7 +178,7 @@ input:focus~.highlight {
     letter-spacing: 1px;
     background: transparent;
     border: 0;
-    border-bottom: 2px solid #3160B6;
+    border-bottom: 2px solid #d61c6c;
     cursor: pointer;
     transition: all 0.15s ease;
 }
@@ -179,12 +191,12 @@ input:focus~.highlight {
 /* Button modifiers */
 
 .buttonBlue {
-    background: #4a89dc;
-    text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);
+    background: #d61c6c;
+    text-shadow: 1px 1px 0 rgb(214, 28, 108);
 }
 
 .buttonBlue:hover {
-    background: #357bd8;
+    background: #f0418d;
 }
 
 
