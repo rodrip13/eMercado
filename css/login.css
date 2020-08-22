@@ -15,11 +15,11 @@ img {
 
 body {
     font-family: Helvetica;
-    background: hsla(0, 0%, 99%, 1);
-    background: linear-gradient(45deg, hsla(0, 0%, 99%, 0.5) 0%, hsla(334, 77%, 47%, 1) 100%, hsla(319, 72%, 75%, 1) 100%);
-    background: -moz-linear-gradient(45deg, hsla(0, 0%, 99%, 0.5) 0%, hsla(334, 77%, 47%, 1) 100%, hsla(319, 72%, 75%, 1) 100%);
-    background: -webkit-linear-gradient(45deg, hsla(0, 0%, 99%, 0.5) 0%, hsla(334, 77%, 47%, 1) 100%, hsla(319, 72%, 75%, 1) 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#FCFCFC", endColorstr="#D61C6C", GradientType=1);
+    background: #df5e73;
+    background: -moz-linear-gradient(left, #df5e73 0%, #d23354 31%, #e82a7b 100%);
+    background: -webkit-linear-gradient(left, #df5e73 0%, #d23354 31%, #e82a7b 100%);
+    background: linear-gradient(to right, #df5e73 0%, #d23354 31%, #e82a7b 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#df5e73', endColorstr='#e82a7b', GradientType=1);
     background-attachment: fixed;
 }
 
