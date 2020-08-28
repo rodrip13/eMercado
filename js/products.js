@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     getJSONData(PRODUCTS_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             //console.log(resultObj.data);
-            sortAndShowProducts(ORDER_DESC_BY_COST, resultObj.data);
+            sortAndShowProducts(ORDER_ASC_BY_COST, resultObj.data);
         }
 
     });

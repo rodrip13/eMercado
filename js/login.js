@@ -4,18 +4,76 @@
 document.addEventListener("DOMContentLoaded", function(e) {
     document.getElementById("button").addEventListener("click", function(e) {
 
+
         let email = document.getElementById('email');
         let pass = document.getElementById('pass');
 
+        //guardamos datos de email y contrasena en localstorage
+        localStorage.setItem('Usuario', email.value);
+
+
+
+        //Validacipon de que los campos de "email" y "contrasena" no esten vacios
+
         if (email.value.length != 0 && pass.value.length != 0) {
+            console.log(email.value)
+            console.log(pass.value)
             return location.href = "index.html";
+
         } else {
             let error = document.getElementById("error");
             error.textContent = "Usuario o contraseña incorrecta";
         }
+
+
     })
 
+
+    /* 
+        if (storageAvailable('localStorage')) {
+            //Si esxite aca va el codigo que debemos ejecutar
+            console.log("hay local storage")
+                // Yippee! We can use localStorage awesomeness
+        } else {
+            // Si no tenemos accesso o no existe nos va a devover esto
+            console.log("no se encontro nada")
+
+        } */
+
+
+
+
+
+
+
 });
+
+
+
+//Tenemos que obtener usuario y contraseña
+
+
+
+
+//guardarlas en sessionstorage
+//y despues en cada html preguntar esa info y colocar el nombre
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
