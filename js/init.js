@@ -74,29 +74,16 @@ var getJSONData = function(url) {
 document.addEventListener("DOMContentLoaded", function(e) {
 
 
+
     var usuario = localStorage.getItem('Usuario');
-    console.log(storage.length);
+    //  console.log(localStorage.length);
 
-    function redirect() {
-        if (storage.length == 0) {
-            return location.href = "login.html";
-        } else if (storage.length == 1) {
-            return location.href = "index.html";
-
-        }
-    }
-
-
-    redirect()
     console.log(usuario);
+    if (localStorage.length != 0) {
+        var usuariohtml = document.getElementById("usuario");
+        //console.log(usuariohtml);
+        usuariohtml.innerHTML = usuario;
 
-    var usuariohtml = document.getElementById("usuario");
-    console.log(usuariohtml);
-    usuariohtml.innerHTML = usuario;
-
-
-
-
-
+    }
 
 });
