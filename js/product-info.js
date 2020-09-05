@@ -43,12 +43,22 @@ function showInfoProducto(array) {
     let title = document.getElementById("name-prod");
     let category = document.getElementById("category");
     let description = document.getElementById("description");
-
-    let related = document.getElementById("img-related");
-
     let soldcount = document.getElementById("sold-count");
 
-    title.innerHTML = `` + product.name + `<div class="text-right text-muted h2'><small class="">` + product.currency + ` ` + product.cost + `</small></div>`;
+    title.innerHTML = `
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-8">
+                                <p class="font-weight-light text-muted">` + product.category + `</p>
+                                <h1>` + product.name + `</h1>
+                            </div>
+                            <div class="col-4">
+                                <div class="h1 text-muted">
+                                    <div class="">` + product.currency + ` ` + product.cost + `</div>
+                                </div>
+                            </div>
+                        </div>              
+                    `;
+
     description.innerHTML = product.description;
     soldcount.innerHTML = product.soldCount + ` vendidos`;
 
@@ -57,7 +67,7 @@ function showInfoProducto(array) {
 
 }
 
-function mostrarProductosRelacionados(array) {
+function showProductsRelated(array) {
     let relatedProd = document.getElementById("img-related");
     let products = array;
 
@@ -83,6 +93,45 @@ function mostrarProductosRelacionados(array) {
     }
 }
 
+function showComments(array) {
+
+    //Muestra el promedio de comentario y estrelllas
+    let commentsProm = document.getElementById("commentsProm");
+    let htmlContentToAppend = "";
+
+
+
+    for (let i = 0; i < array.length; i++) {
+        let comment = array[i];
+
+        htmlContentToAppend += `
+        <div class="row justify-content-between align-items-center">
+        <div class="col-9">
+            <p class="text-monospace">` + comment.user + `<small class"font-weight-light"> ` + comment.dateTime + `</small></p>
+            
+            <p>` + comment.description + `</p>
+        </div>
+        <div class="col-3">
+        <p class="estrellas">` + comment.score + ` <i class="fas fa-star estrella` + array[i] + `"></i><i class="fas fa-star estrella"></i><i class="fas fa-star estrella"></i><i class="fas fa-star estrella"></i><i class="fas fa-star estrella"></i></p>
+        </div>
+        
+        
+        </div>
+        <br>           
+        `;
+        commentsProm.innerHTML = htmlContentToAppend;
+        console.log(document.getElementsByClassName("estrellas"));
+    }
+}
+
+function estrellita(num) {
+    let icon = [];
+    icon = document.getElementsByClassName("fa-star");
+    for (let i = 0; i < num; i++) {
+        //inserto estrella amarilla o cam
+        icon[i].className = " checked";
+    }
+}
 
 document.addEventListener("DOMContentLoaded", function(e) {
     //  mostrarProductosRelacionados();
@@ -99,7 +148,16 @@ document.addEventListener("DOMContentLoaded", function(e) {
     getJSONData(PRODUCTS_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             products = resultObj.data;
-            mostrarProductosRelacionados(products);
+            showProductsRelated(products);
+
+        }
+    });
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
+        if (resultObj.status === "ok") {
+            comments = resultObj.data;
+            console.log(comments);
+            showComments(comments);
+            // estrellita(2);
 
         }
     });
