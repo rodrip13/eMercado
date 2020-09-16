@@ -49,7 +49,7 @@ function showProductsList() {
             ((maxCost == undefined) || (maxCost != undefined && parseInt(products.cost) <= maxCost))) {
 
             htmlContentToAppend += `
-            <a href="product-info.html" class="list-group-item list-group-item-action">
+            <a href="product-info.html" class="list-group-item list-group-item-action" id="` + products.id + `">
                 <div class="row shadow p-3 mb-5 bg-white rounded">
                     <div class="col-3">
                         <img src="` + products.imgSrc + `" alt="` + products.description + `" class="img-thumbnail">
@@ -68,6 +68,41 @@ function showProductsList() {
             document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
         }
     }
+}
+
+
+const buscar = document.getElementById("buscar");
+const boton = document.getElementById("button-addon2");
+
+
+function Buscar(array) {
+    let busqueda = buscar.value.toLowerCase();
+    for (let i = 0; i < array.length; i++) {
+        let producto = array[i];
+        let nombre = producto.name.toLowerCase();
+        if (nombre.indexOf(busqueda) !== -1) {
+            htmlContentToAppend += `
+            <a href="product-info.html" class="list-group-item list-group-item-action">
+                <div class="row shadow p-3 mb-5 bg-white rounded">
+                    <div class="col-3">
+                        <img src="` + producto.imgSrc + `" alt="` + producto.description + `" class="img-thumbnail">
+                    </div>
+                    <div class="col">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">` + producto.name + ` - <strong>` + producto.currency + ` ` + producto.cost + `</strong></h4>
+                            <small class="text-muted">` + producto.soldCount + ` artículos</small>
+                        </div>
+                        <p class="mb-1">` + products.description + `</p>
+                    </div>
+                </div>
+            </a>
+            `
+
+            document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
+        }
+
+    }
+
 }
 
 function sortAndShowProducts(sortCriteria, productsArray) {
@@ -89,13 +124,29 @@ function sortAndShowProducts(sortCriteria, productsArray) {
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e) {
+
+
     getJSONData(PRODUCTS_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
-            //console.log(resultObj.data);
-            sortAndShowProducts(ORDER_ASC_BY_COST, resultObj.data);
+            var productosArray = resultObj.data;
+            sortAndShowProducts(ORDER_ASC_BY_COST, productosArray);
         }
 
+        /*        document.getElementById("1234").addEventListener("click", function() {
+                   localStorage.setItem('enlace', '1234')
+               });
+               document.getElementById("2020").addEventListener("click", function() {
+                   localStorage.setItem("enlace", "2020")
+               });
+               document.getElementById("1357").addEventListener("click", function() {
+                   localStorage.setItem("enlace", "1357")
+               });
+               document.getElementById("2468").addEventListener("click", function() {
+                   localStorage.setItem("enlace", "2468")
+               });
+        */
     });
+
 
     document.getElementById("sortAsc").addEventListener("click", function() {
         sortAndShowProducts(ORDER_ASC_BY_COST);
@@ -139,4 +190,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
         showProductsList()
 
     });
+    //buscar.addEventListener('onkeyup', Buscar(productos));
+    //boton.addEventListener('oncClick', Buscar(productosArray))
+
+
 });

@@ -52,7 +52,7 @@ function showInfoProducto(array) {
                                 <h1>` + product.name + `</h1>
                             </div>
                             <div class="col-4">
-                                <div class="h1 text-muted">
+                                <div class="h1 shadow p-3 mb-5 bg-white rounded">
                                     <div class="">` + product.currency + ` ` + product.cost + `</div>
                                 </div>
                             </div>
@@ -94,75 +94,147 @@ function showProductsRelated(array) {
 }
 
 function showComments(array) {
-
     //Muestra el promedio de comentario y estrelllas
-    let commentsProm = document.getElementById("commentsProm");
-    let htmlContentToAppend = "";
-
+    let commentario = document.getElementById("commentsUser");
+    let comentariosUsuarios = "";
 
 
     for (let i = 0; i < array.length; i++) {
         let comment = array[i];
+        var estrella = `<span class="fas fa-star checked"></span>`;
+        var Noestrella = `<span class="fas fa-star"></span>`
 
-        htmlContentToAppend += `
+
+        comentariosUsuarios += `
         <div class="row justify-content-between align-items-center">
+            <div class="col-9">
+                <p class="text-monospace">` + comment.user + `
+                    <small class"font-weight-light"> ` + comment.dateTime + `
+                    </small></p>          
+                <p>` + comment.description + `</p>
+            </div>
+            <div class="col-3">
+            ` + estrella.repeat(comment.score) + Noestrella.repeat(5 - comment.score) + `
+            </div>
+        </div>
+       <hr>
+        `
+
+
+        commentario.innerHTML = comentariosUsuarios;
+        //console.log(document.getElementsByClassName("estrellas"));
+
+    }
+
+};
+
+function estrellita(num) {
+    for (let i = 0; i < num; i++) {
+        estrellas += `<span class="fas fa-star checked"></span>`
+    };
+    for (let i = 0; i < num - 5; i++) {
+        estrellas += `<span class="fas fa-star"></span>`
+    };
+}
+
+
+
+
+
+function commentUser() {
+    //Obteniendo los valores del comentario
+    let user = localStorage.getItem("Usuario");
+    let hora = new Date();
+    let mostrarHora = hora.getFullYear() + `-` +
+        (hora.getMonth() + 1) + `-` +
+        hora.getDate() + `   ` +
+        hora.getHours() + `:` +
+        hora.getMinutes() + `:` +
+        hora.getSeconds();
+    let nuevoComentario = document.getElementById('comentario').value;
+    // tomar las estrellas elegidas
+    let ratingDOM = document.getElementsByName("rating");
+    let rating = "";
+    for (let i = 0; i < ratingDOM.length; i++) {
+        let rate = ratingDOM[i];
+        if (rate.checked) {
+            rating = rate.value;
+        }
+    }
+
+    //Mostrar
+    let estre = parseInt(rating);
+    const comment = [{
+        "score": estre,
+        "description": nuevoComentario,
+        "user": user,
+        "dateTime": mostrarHora
+    }, ];
+
+    localStorage.setItem("comentario", JSON.stringify(comment))
+
+
+    let commentario = document.getElementById("commentsUser");
+    let comentariosUsuarios = "";
+    var estrella = `<span class="fas fa-star checked"></span>`;
+    var Noestrella = `<span class="fas fa-star"></span>`
+    comentariosUsuarios += `
+    <div class="row justify-content-between align-items-center">
         <div class="col-9">
-            <p class="text-monospace">` + comment.user + `<small class"font-weight-light"> ` + comment.dateTime + `</small></p>
-            
+            <p class="text-monospace">` + comment.user + `
+                <small class"font-weight-light"> ` + comment.dateTime + `
+                </small></p>          
             <p>` + comment.description + `</p>
         </div>
         <div class="col-3">
-        <p class="estrellas">` + comment.score + ` <i class="fas fa-star estrella` + array[i] + `"></i><i class="fas fa-star estrella"></i><i class="fas fa-star estrella"></i><i class="fas fa-star estrella"></i><i class="fas fa-star estrella"></i></p>
+        ` + estrella.repeat(comment.score) + Noestrella.repeat(5 - comment.score) + `
         </div>
-        
-        
-        </div>
-        <br>           
-        `;
-        commentsProm.innerHTML = htmlContentToAppend;
-        console.log(document.getElementsByClassName("estrellas"));
+    </div>
+   <hr>
+    `
+    commentario.innerHTML += comentariosUsuarios;
+}
+
+function obtenerComentarios() {
+    if (localStorage.getItem("comentario")) {
+        let comentarios = JSON.parse(localStorage.getItem("comentario"));
+    } else {
+        console.log("No hay entradas e  localStorage")
     }
 }
 
-function estrellita(num) {
-    let icon = [];
-    icon = document.getElementsByClassName("fa-star");
-    for (let i = 0; i < num; i++) {
-        //inserto estrella amarilla o cam
-        icon[i].className = " checked";
-    }
-}
+
 
 document.addEventListener("DOMContentLoaded", function(e) {
-    //  mostrarProductosRelacionados();
+
     getJSONData(PRODUCT_INFO_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             var productInfo = resultObj.data;
             showImagesGallery(productInfo.images);
             showInfoProducto(productInfo);
-            // console.log(prod_relacionados);
-            //mostrarProductosRelacionados();
 
         }
     });
     getJSONData(PRODUCTS_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
-            products = resultObj.data;
+            var products = resultObj.data;
             showProductsRelated(products);
 
         }
     });
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
-            comments = resultObj.data;
-            console.log(comments);
+            var comments = resultObj.data;
             showComments(comments);
-            // estrellita(2);
+            console.log(comments)
+
 
         }
     });
+    //document.getElementById("btnComentar").addEventListener("click", commentUser());
 
-    //console.log(products[2]);
+
+    //document.getElementById("btnComentar").addEventListener('click', commentUser());
 });
 
 
