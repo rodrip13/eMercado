@@ -164,12 +164,12 @@ function commentUser() {
 
     //Mostrar
     let estre = parseInt(rating);
-    const comment = [{
+    const comment = {
         "score": estre,
         "description": nuevoComentario,
         "user": user,
         "dateTime": mostrarHora
-    }, ];
+    };
 
     localStorage.setItem("comentario", JSON.stringify(comment))
 
@@ -193,6 +193,7 @@ function commentUser() {
    <hr>
     `
     commentario.innerHTML += comentariosUsuarios;
+    nuevoComentario.textContent = "";
 }
 
 function obtenerComentarios() {
@@ -226,15 +227,13 @@ document.addEventListener("DOMContentLoaded", function(e) {
         if (resultObj.status === "ok") {
             var comments = resultObj.data;
             showComments(comments);
-            console.log(comments)
-
-
+            console.log(comments);
         }
     });
-    //document.getElementById("btnComentar").addEventListener("click", commentUser());
 
-
-    //document.getElementById("btnComentar").addEventListener('click', commentUser());
+    document.getElementById("btnComentar").addEventListener("click", function() {
+        commentUser()
+    });
 });
 
 

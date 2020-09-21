@@ -66,8 +66,15 @@ function showProductsList() {
             `
 
             document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
+        } else {
+            htmlContentToAppend = `
+            
+                <p class="text-center">No existe elemento dentro de ese rango</p>
+        
+            `
         }
     }
+    document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
 }
 
 

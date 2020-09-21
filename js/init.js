@@ -67,6 +67,9 @@ var getJSONData = function(url) {
 
  */
 
+function Logout() {
+    localStorage.removeItem("Usuario");
+}
 
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
@@ -74,16 +77,17 @@ var getJSONData = function(url) {
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e) {
 
-
-    var usuario = localStorage.getItem('Usuario');
-    //  console.log(localStorage.length);
-
-    console.log(usuario);
+    //Nombre de Usuario
+    var usuario = localStorage.getItem('Usuario')
     if (localStorage.length != 0) {
         var usuariohtml = document.getElementById("usuario");
         //console.log(usuariohtml);
         usuariohtml.innerHTML = usuario;
-
     }
+
+    //Logout
+    document.getElementById("salir").addEventListener("click", function() {
+        Logout();
+    });
 
 });
