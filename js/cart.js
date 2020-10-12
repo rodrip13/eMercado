@@ -1,54 +1,84 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
+
+const CART_INFO_URL2 = "https://japdevdep.github.io/ecommerce-api/cart/654.json";
+
+
 function showCart(array) {
     let mostrar = document.getElementById("mostrarInfo");
 
-    let nombre = array.articles[0].name;
-    let img = array.articles[0].src;
-    let cantidad = array.articles[0].count;
-    let costo = array.articles[0].unitCost;
-    let moneda = array.articles[0].currency;
+    for (let i = 0; i < array.length; i++) {
+        const article = array[i];
+        var subTotal = article.unitCost * article.count;
+        if (article.currency == "UYU") {
+            article.currency = "USD";
+            article.unitCost /= 40;
+        }
 
-    let subtotal = array.articles[0].unitCost * array.articles[0].count;
-
-    document.getElementById("imagenProducto").src = img;
-    document.getElementById("nombreProducto").textContent = nombre;
-    document.getElementById("precioProducto").innerHTML = costo;
-    document.getElementById("cantidad").value = cantidad;
-
-
-    /* 
         mostrar.innerHTML += `
-        <h1>Nombre Prodcuto</h1>
-        <div id="nombreProducto"> ` + nombre + `</div>
-        <h2>cantidad</h2>
-        <div id="cantidadProd">` + cantidad + `</div>
-        <h2>Precio por unidad</h2>
-        <div id="precio">` + moneda + `  ` + costo + `</div>
-        <img id="imagenProducto" src="` + img + `" alt="">
-        <h1 id="subtotal">` + subtotal + `</h1>
+        <div class="">
+        
+        <div class="row justify-content-between text-center">
+            <div class="col-md-3 align-self-center">
+                <img src="` + article.src + `" alt="` + article.name + `" class="img-rounded" width=125>
+            </div>
+            <div class="col align-self-center">
+                <p>` + article.name + `</p>
+            </div>
+            <div class="col-md-2 align-self-center">
+                <p><span class="currency">` + article.currency + `</span> <span id="unitCost_${i}">` + article.unitCost + `</p>
+            </div>
+            <div class="col-md-1 align-self-center">
+                <input type="number" class="form-control cantidad" id="cantidad` + i + `" onchange="showSubtotal(${i})" value="` + article.count + `" min="0">
+            </div>
+            <div class="col-md-1 align-self-center">
+                <p class="subTotal" id="subtotal_` + i + `" change="showSubtotalTotal(${i})">` + article.unitCost * article.count + `</p>
+            </div>
+        </div>
+        <hr>
+        </div>
         `;
-     */
-    // document.getElementById("cantidad").value = cantidad;
+    }
 
+    /*     let html = document.getElementById("subTotal");
+        html.innerHTML = subTotal; */
 }
+
+function showSubtotal(i) {
+    let cantidad = document.getElementById("cantidad" + i).value;
+    let precioUnit = document.getElementById("unitCost_" + i).innerHTML;
+    subtotal = cantidad * precioUnit
+    let sub = document.getElementById(`subtotal_${i}`);
+
+    sub.innerHTML = subtotal;
+    showSubtotalTotal();
+}
+
+
+let Total;
+
+
+function showSubtotalTotal() {
+    let subtotal = document.getElementsByClassName("subTotal");
+    let totalSubtotal = 0;
+    for (let i = 0; i < subtotal.length; i++) {
+        var element = subtotal[i].innerHTML;
+        totalSubtotal = totalSubtotal + (+element);
+    }
+    document.getElementById("subTotal").innerHTML = "USD " + totalSubtotal;
+}
+
+
 
 
 document.addEventListener("DOMContentLoaded", function(e) {
 
-    getJSONData(CART_INFO_URL).then(function(resultObj) {
+    getJSONData(CART_INFO_URL2).then(function(resultObj) {
         if (resultObj.status === "ok") {
             var info = resultObj.data;
-            //showProductsRelated(products);
-            showCart(info);
-
-            document.getElementById("cantidad").addEventListener("change", function() {
-                cantidad = this.value;
-                let costo = info.articles[0].unitCost;
-                let subtotal = costo * cantidad;
-                document.getElementById("subtotal").innerHTML = subtotal;
-            });
+            showCart(info.articles);
+            showSubtotalTotal();
 
         }
     });

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -38,49 +38,39 @@
     </nav>
     <div class="container p-5">
 
-        <div id="mostrarInfo">
-
+        <div class="container shadow">
+            <div class="row shadow p-3 mb-5 bg-white align-self-center text-center">
+                <div class="col-md-3 align-self-center">Foto</div>
+                <div class="col align-self-center">Producto</div>
+                <div class="col-md-2 align-self-center">Precio</div>
+                <div class="col-md-1 align-self-center">Cantidad</div>
+                <div class="col-md-1 align-self-center">Subtotal</div>
+            </div>
+            <div id="mostrarInfo" class="shadow-none p-3 mb-5 bg-white"></div>
         </div>
+        <br>
+        <div class="container shadow">
+            <div class="row shadow p-3 mb-5 bg-white text-center justify-content-between">
+                <div class="col-md-3 align-self-start">
+                    <h1>Subtotal</h1>
+                </div>
+                <div class="col-md-1 text-left">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary active">
+                          <input type="radio" name="options" id="option1" checked>USD
+                        </label>
+                        <label class="btn btn-secondary">
+                          <input type="radio" name="options" id="option2">UYU
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3 align-self-end">
 
+                    <h1 id="subTotal"></h1>
+                </div>
 
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Cantidad</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">
-                        <img src="" id="imagenProducto" alt="">
-                    </th>
-                    <td>
-                        <p id="nombreProducto"></p>
-                    </td>
-                    <td>
-                        <p id="precioProducto"></p>
-                    </td>
-                    <td>
-                        <input type="number" class="form-control" id="cantidad" placeholder="" required="" value="1" min="0">
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
-        </table>
+            </div>
+        </div>
 
 
 
